@@ -19,6 +19,6 @@ public class ClojureReplModule extends AbstractModule {
 
     @Override
     public void configure() {
-        logger.trace("completed module configuration");
+        bind(ClojureReplService.class).asEagerSingleton();
     }
 }
