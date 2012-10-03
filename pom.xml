@@ -7,6 +7,12 @@
     <version>1.0</version>
     <name>elasticsearch-clojure-repl</name>
     <url>http://maven.apache.org</url>
+    <repositories>
+      <repository>
+        <id>clojars</id>
+        <url>http://clojars.org/repo/</url>
+      </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
@@ -122,6 +128,11 @@
             <groupId>org.clojure</groupId>
             <artifactId>clojure</artifactId>
             <version>${clojure.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>swank-clojure</groupId>
+          <artifactId>swank-clojure</artifactId>
+          <version>1.5.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
