@@ -28,7 +28,7 @@
   (info "starting nrepl/tty on {}:{}" addr port)
   (start-server :bind addr :port port :transport-fn transport/tty))
 
-(defn -repl [logger_ settings]
+(defn repl [logger_ settings]
   (reset! logger logger_)
   (repl-tty (get settings "repl.clojure.tty.address" "127.0.0.1")
             (Integer/parseInt (get settings "repl.clojure.tty.port" "40050")))

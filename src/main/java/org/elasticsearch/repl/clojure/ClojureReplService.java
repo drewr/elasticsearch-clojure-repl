@@ -6,7 +6,9 @@ import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.logging.ESLogger;
 import org.elasticsearch.common.logging.Loggers;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.repl.clojure.Repl;
+import clojure.lang.RT;
+import clojure.lang.Symbol;
+import clojure.lang.Var;
 
 public class ClojureReplService extends AbstractLifecycleComponent<ClojureReplService> {
     Settings settings;
@@ -22,7 +24,8 @@ public class ClojureReplService extends AbstractLifecycleComponent<ClojureReplSe
 
     @Override
     protected void doStart() throws ElasticSearchException {
-        Repl.repl(logger, settings.getAsMap());
+        RT.var("clojure.core", "require").invoke(Symbol.intern("org.elasticsearch.repl.clojure.Repl"));
+        RT.var("org.elasticsearch.repl.clojure.Repl", "repl").invoke(logger, settings.getAsMap());
     }
 
     @Override
