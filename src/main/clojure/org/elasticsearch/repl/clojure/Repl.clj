@@ -1,5 +1,6 @@
 (ns org.elasticsearch.repl.clojure.Repl
-  (:require [clojure.tools.nrepl.server :refer [start-server]])
+  (:require [clojure.tools.nrepl.server :refer [start-server]]
+            [clojure.tools.nrepl.transport :as transport])
   (:import (org.elasticsearch.common.logging.ESLogger))
   (:gen-class :methods [#^{:static true}
                         [repl [org.elasticsearch.common.logging.ESLogger
@@ -19,11 +20,17 @@
   (when @logger
     (.trace @logger msg (to-array args))))
 
-(defn nrepl [addr port]
-  (info "starting nrepl on {}:{}" addr port)
+(defn repl-bin [addr port]
+  (info "starting nrepl/bencode on {}:{}" addr port)
   (start-server :bind addr :port port))
+
+(defn repl-tty [addr port]
+  (info "starting nrepl/tty on {}:{}" addr port)
+  (start-server :bind addr :port port :transport-fn transport/tty))
 
 (defn -repl [logger_ settings]
   (reset! logger logger_)
-  (nrepl (get settings "repl.clojure.nrepl.address" "127.0.0.1")
-         (Integer/parseInt (get settings "repl.clojure.nrepl.port" "40050"))))
+  (repl-tty (get settings "repl.clojure.tty.address" "127.0.0.1")
+            (Integer/parseInt (get settings "repl.clojure.tty.port" "40050")))
+  (repl-bin (get settings "repl.clojure.bin.address" "127.0.0.1")
+            (Integer/parseInt (get settings "repl.clojure.bin.port" "40051"))))
