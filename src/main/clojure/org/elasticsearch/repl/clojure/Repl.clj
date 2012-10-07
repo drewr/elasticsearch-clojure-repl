@@ -1,4 +1,5 @@
 (ns org.elasticsearch.repl.clojure.Repl
+  (:require [clojure.tools.nrepl.server :refer [start-server]])
   (:import (org.elasticsearch.common.logging.ESLogger))
   (:gen-class :methods [#^{:static true}
                         [repl [org.elasticsearch.common.logging.ESLogger
@@ -18,10 +19,11 @@
   (when @logger
     (.trace @logger msg (to-array args))))
 
-(defn repl [port addr]
-  (debug "starting repl on {}:{}" port addr))
+(defn nrepl [addr port]
+  (info "starting nrepl on {}:{}" addr port)
+  (start-server :bind addr :port port))
 
 (defn -repl [logger_ settings]
   (reset! logger logger_)
-  (repl (get settings "repl.clojure.address" "127.0.0.1")
-        (get settings "repl.clojure.port" "40050")))
+  (nrepl (get settings "repl.clojure.nrepl.address" "127.0.0.1")
+         (Integer/parseInt (get settings "repl.clojure.nrepl.port" "40050"))))
