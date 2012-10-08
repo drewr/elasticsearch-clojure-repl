@@ -4,9 +4,9 @@
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-clojure-repl</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <name>elasticsearch-clojure-repl</name>
-    <url>http://maven.apache.org</url>
+    <url>http://github.com/drewr/elasticsearch-clojure-repl</url>
     <repositories>
       <repository>
         <id>clojars</id>
