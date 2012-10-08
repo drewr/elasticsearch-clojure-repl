@@ -30,6 +30,7 @@
       <outputDirectory>/</outputDirectory>
       <includes>
         <include>clojure-${clojure.version}.jar</include>
+        <include>tools.nrepl-*.jar</include>
       </includes>
     </fileSet>
   </fileSets>

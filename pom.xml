@@ -101,13 +101,6 @@
                 </configuration>
                 <executions>
                   <execution>
-                    <id>compile</id>
-                    <phase>compile</phase>
-                    <goals>
-                      <goal>compile</goal>
-                    </goals>
-                  </execution>
-                  <execution>
                     <id>test</id>
                     <phase>test</phase>
                     <goals>
@@ -118,6 +111,9 @@
             </plugin>
         </plugins>
         <resources>
+          <resource>
+            <directory>src/main/clojure</directory>
+          </resource>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
